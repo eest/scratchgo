@@ -1,3 +1,4 @@
+# Start with a build stage that will create the 'scratchgo' binary.
 FROM golang:alpine AS builder
 
 # We use the new go module support, so build stuff in a clean directory
@@ -12,10 +13,10 @@ COPY . .
 # https://groups.google.com/forum/#!topic/golang-nuts/Rw89bnhPBUI
 RUN go build -tags=netgo
 
-# Start a new container stage, this is the one we will actually run.
+# Create a new stage, this is the container we will actually run.
 FROM scratch
 
-# Copy our static executable from the builder container.
+# Copy the static executable from the builder stage.
 COPY --from=builder /build/scratchgo /
 
 # Make port 8080 available outside this container.
