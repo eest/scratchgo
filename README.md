@@ -2,10 +2,10 @@
 
 ## About
 This is a minimal example of how to create a statically linked
-webserver in go that can be executed in a Docker [FROM scratch](https://hub.docker.com/_/scratch) container.
+webserver in Go that can be executed in a Docker [FROM scratch](https://hub.docker.com/_/scratch) container.
 
 I use a [multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/)
-to build the binary so no go related tools needs to be installed.
+to build the binary so no Go related tools needs to be installed.
 
 Keep in mind that this minimal webserver is only meant for
 demonstrational purposes. For production traffic you need to think about
@@ -53,3 +53,9 @@ You will need to build debuggability into your application itself
 through means like logging, [tracing](https://opentracing.io/) or some sort
 of exposed metrics where the app presents its state, possibly using
 something like [expvar](https://golang.org/pkg/expvar/).
+
+## This all sounds great, but I don't want to use Go
+
+As long as your programming language of choice has the ability to generate
+statically linked binaries you should be able to use a slightly modified
+version of this setup and be good to go.
