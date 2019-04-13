@@ -47,20 +47,22 @@ for debugging purposes or modifying settings this will not work since
 there is no shell to execute (and even if there was, no tools like
 `ls` or `cat` for poking around).
 
-If a tool is available in the host operating system you might be able to
-utilize [nsenter(1)](https://manpages.debian.org/testing/util-linux/nsenter.1.en.html)
-to interact with the container given that the tool is compatible.
-
 ## Ways to deal with the lack of a shell
 
-You will need to build debuggability into your application itself
+If a tool is available in the host operating system you might be able to
+utilize [nsenter(1)](https://manpages.debian.org/testing/util-linux/nsenter.1.en.html)
+to interact with the container given that the tool is compatible. Keep in mind
+that this creates a dependency between the container contents and the host it
+is running on which might be unwanted.
+
+Instead you should build debuggability into the application itself
 through means like logging, [tracing](https://opentracing.io/) or some sort
 of exposed metrics where the app presents its state, possibly using
 something like [expvar](https://golang.org/pkg/expvar/).
 
-There should also exist some sort of administrative API where runtime
+The app should also have some sort of administrative API where runtime
 settings such as log levels can be configured without local access to
-the process.
+the container.
 
 ## This all sounds great, but I don't want to use Go
 
