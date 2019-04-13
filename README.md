@@ -44,8 +44,12 @@ Basing your container on a `scratch` image gives some advantages:
 
 If your workflow involves entering a running container via some shell
 for debugging purposes or modifying settings this will not work since
-there is no shell to execute (and even if there was, no binaries like
+there is no shell to execute (and even if there was, no tools like
 `ls` or `cat` for poking around).
+
+If a tool is available in the host operating system you might be able to
+utilize [nsenter(1)](https://manpages.debian.org/testing/util-linux/nsenter.1.en.html)
+to interact with the container given that the tool is compatible.
 
 ## Ways to deal with the lack of a shell
 
