@@ -33,3 +33,23 @@ docker run -p 8080:8080 scratchgo:v0.0.1
 ```
 curl localhost:8080
 ```
+
+## Why would I want this?
+
+Basing your container on a `scratch` image gives some advantages:
+* The size of the image will be small.
+* Security inspections can be focused on the app itself and not the additional and possibly unused cruft from a more general base image.
+
+## Why would I not want this?
+
+If your workflow involves entering a running container via some shell
+for debugging purposes this will not work since there is no shell to
+execute (and even if there was, no binaries like `ls` or `cat` for
+poking around).
+
+## Ways to deal with the lack of a shell
+
+You will need to build debuggability into your application itself
+through means like logging, [tracing](https://opentracing.io/) or some sort
+of exposed metrics where the app presents its state, possibly using
+something like [expvar](https://golang.org/pkg/expvar/).
