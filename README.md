@@ -43,9 +43,9 @@ Basing your container on a `scratch` image gives some advantages:
 ## Why would I not want this?
 
 If your workflow involves entering a running container via some shell
-for debugging purposes this will not work since there is no shell to
-execute (and even if there was, no binaries like `ls` or `cat` for
-poking around).
+for debugging purposes or modifying settings this will not work since
+there is no shell to execute (and even if there was, no binaries like
+`ls` or `cat` for poking around).
 
 ## Ways to deal with the lack of a shell
 
@@ -53,6 +53,10 @@ You will need to build debuggability into your application itself
 through means like logging, [tracing](https://opentracing.io/) or some sort
 of exposed metrics where the app presents its state, possibly using
 something like [expvar](https://golang.org/pkg/expvar/).
+
+There should also exist some sort of administrative API where runtime
+settings such as log levels can be configured without local access to
+the process.
 
 ## This all sounds great, but I don't want to use Go
 
